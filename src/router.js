@@ -3,9 +3,9 @@ const router = require('express').Router();
 const homeController = require('./controllers/homeController');
 const cubeController = require('./controllers/cubeController');
 
-app.use(homeController);
-app.use('/cubes', cubeController);
-app.get('*', (req,res) => {
+router.use(homeController);
+router.use('/cubes', cubeController);
+router.get('*', (req,res) => {
     res.redirect('404');
 });
 
