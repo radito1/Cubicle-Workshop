@@ -1,17 +1,8 @@
 const Cube = require('../models/Cube');
 
-const cubes = [
-    {
-        id: 1,
-        name: 'Cube',
-        description: 'Yes this is a cube',
-        difficultyLevel: 3,
-    }
-];
-
-exports.getAll = (search, from, to) => {
-    let result = cubes.slice();
-
+exports.getAll = async (search, from, to) => {
+    let result = await Cube.find().lean();
+    
     if (search) {
         result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
     }
