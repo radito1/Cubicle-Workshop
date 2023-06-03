@@ -14,14 +14,14 @@ exports.getAll = async (search, from, to) => {
     if (to) {
         result = result.filter(cube => cube.difficultyLevel <= Number(from));
     }
+
+    return result;
 };
 
 exports.getOne = (cubeId) => Cube.findById(cubeId);
 
-exports.create = async (cubeData) => {
+exports.create = (cubeData) => {
     const cube = new Cube(cubeData);
 
-    await cube.save();
-
-    return cube;
-} 
+    return cube.save();
+};
