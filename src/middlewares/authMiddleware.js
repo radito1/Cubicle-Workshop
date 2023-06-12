@@ -5,7 +5,7 @@ exports.auth = async (req, res, next) => {
     const token = req.cookies['auth'];
 
     if (token) {
-        try{
+        try {
             const payload = await jwt.verify(token, SECRET);
 
             req.user = payload;
@@ -13,7 +13,7 @@ exports.auth = async (req, res, next) => {
             res.locals.isAuthenticated = true;
 
             next();
-        } catch(err) {
+        } catch (err) {
             res.clearCookie('auth');
 
             res.redirect('/user/login');
@@ -21,4 +21,12 @@ exports.auth = async (req, res, next) => {
     } else {
         next();
     }
+};
+
+exports.isAuth = (req, res, next) => {
+    if (!req.user) {
+        return res.redirect('/users/login');
+    }
+    
+    next();
 };

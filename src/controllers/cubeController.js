@@ -3,8 +3,9 @@ const router = require('express').Router();
 const cubeManager = require('../managers/cubeManager');
 const accessoryManager = require('../managers/accessoryManager');
 const { getDifficultyOptionsViewData } = require('../utils/viewHelpers');
+const { isAuth } = require('../middlewares/authMiddleware');
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
     res.render('cube/create');
 });
 
